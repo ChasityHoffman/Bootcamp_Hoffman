@@ -7,8 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
-        //Arrays
         Book[] books = new Book[20];
 
         books[0] = new Book(1, "9780547928227", "The Hobbit", false, "");
@@ -33,87 +31,92 @@ public class Main {
         books[18] = new Book(19, "9781449474256", "Milk and Honey", false, "");
         books[19] = new Book(20, "9780399590504", "Educated", false, "");
 
-        System.out.println(" Hello! Welcome to the Mystical Library. Open your mind and choose a option below! yay!");
-
-        //loops
+        System.out.println(" Hello! Welcome to the ****  Mystical Library  ****  Choose an option below! yay!");
 
         boolean running = true;
 
-        while(running) {
-            System.out.println("Please choose an option below:");
+        while (running) {
+            System.out.println(" ****  Options  ****");
             System.out.println("1. Show Available Books");
             System.out.println("2. Show Checked out Books");
             System.out.println("3. Exit");
 
             int choice = scanner.nextInt();
 
-            //cases
-
-            switch(choice) {
+            switch (choice) {
 
                 case 1:
-                    System.out.println("\nAvailable Books:");
+                    System.out.println("\n**** Available Books ****");
                     for (Book book : books) {
                         if (!book.isCheckedOut()) {
-                            System.out.println( book.getId() + " - "
-                                    + book.getIsbn()  + " - " + book.getTitle());
+                            System.out.println(book.getId() + " - "
+                                    + book.getIsbn() + " - " + book.getTitle());
                         }
                     }
 
-                    //prompt user
-
-                    System.out.println("\nEnter a book Id to check out.");
-                    System.out.println("Enter 0 to return to the homescreen.");
+                    System.out.println("\nEnter Book ID to check out a book");
+                    System.out.println("0 to go back to the home screen");
 
                     int bookId = scanner.nextInt();
 
-                    //return book to homescreen
                     if (bookId == 0) {
                         break;
                     }
 
-                    //find selected book
-
                     for (Book book : books) {
-                        if (book.getId()== bookId)  {
+                        if (book.getId() == bookId) {
                             scanner.nextLine();
                             System.out.println("Enter your name: ");
-                            String name = scanner.nextLine();;
+                            String name = scanner.nextLine();
+                            ;
 
-                        //check out the book
-
-                        book.checkOut(name);
+                            book.checkOut(name);
                             System.out.println("\"" + book.getTitle() + "\" has been checked out to "
-                                    + name + "."  );
+                                    + name + " . ");
                         }
                     }
                     break;
 
-
                 case 2:
                     System.out.println("\nChecked Out Books:");
 
-                    for (Book book : books ) {
+                    for (Book book : books) {
                         if (book.isCheckedOut()) {
-                            System.out.println( book.getId() + " - "+ book.getIsbn()
-                                + " - " + book.getTitle() +" (" + book.getCheckedOutTo() + ")");
+                            System.out.println(book.getId() + " - " + book.getIsbn()
+                                    + " - " + book.getTitle() + " (" + book.getCheckedOutTo() + ")");
+
                         }
                     }
+                    System.out.println("\nC - Check In a Book");
+                    System.out.println("x - Return to the Home Screen");
+
+                    String option = scanner.next();
+
+                    if (option.equalsIgnoreCase("X")) {
+                        break;
+                    }
+
+                    if (option.equalsIgnoreCase("C")) {
+                        System.out.println("Enter Book Id to Check In");
+
+                        int checkInBookId = scanner.nextInt();
+
+                        for (Book book : books) {
+                            if (book.getId() == checkInBookId) {
+                                book.checkIn();
+                                System.out.println("\"" + book.getTitle() + "\" has been checked in.");
+                            }
+                        }
+                    }
+
                     break;
 
                 case 3:
                     System.out.println("Goodbye and remember knowledge is power!");
                     running = false;
                     break;
-                default:
-                    System.out.println("Invalid choice,please try again!");
 
             }
-
         }
-
-        }
-
-
-
+    }
 }
