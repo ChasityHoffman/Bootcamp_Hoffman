@@ -36,6 +36,7 @@ public class Main {
         System.out.println(" Hello! Welcome to the Mystical Library. Open your mind and choose a option below! yay!");
 
         //loops
+
         boolean running = true;
 
         while(running) {
@@ -46,26 +47,55 @@ public class Main {
 
             int choice = scanner.nextInt();
 
+            //cases
 
-        //cases
             switch(choice) {
 
                 case 1:
                     System.out.println("\nAvailable Books:");
                     for (Book book : books) {
                         if (!book.isCheckedOut()) {
-                            System.out.println(book.getId()
-                                    + " - " + book.getTitle());
+                            System.out.println( book.getId() + " - "
+                                    + book.getIsbn()  + " - " + book.getTitle());
+                        }
+                    }
+
+                    //prompt user
+
+                    System.out.println("\nEnter a book Id to check out.");
+                    System.out.println("Enter 0 to return to the homescreen.");
+
+                    int bookId = scanner.nextInt();
+
+                    //return book to homescreen
+                    if (bookId == 0) {
+                        break;
+                    }
+
+                    //find selected book
+
+                    for (Book book : books) {
+                        if (book.getId()== bookId)  {
+                            scanner.nextLine();
+                            System.out.println("Enter your name: ");
+                            String name = scanner.nextLine();;
+
+                        //check out the book
+
+                        book.checkOut(name);
+                            System.out.println("\"" + book.getTitle() + "\" has been checked out to "
+                                    + name + "."  );
                         }
                     }
                     break;
+
 
                 case 2:
                     System.out.println("\nChecked Out Books:");
 
                     for (Book book : books ) {
                         if (book.isCheckedOut()) {
-                            System.out.println(book.getId()
+                            System.out.println( book.getId() + " - "+ book.getIsbn()
                                 + " - " + book.getTitle() +" (" + book.getCheckedOutTo() + ")");
                         }
                     }
@@ -77,7 +107,6 @@ public class Main {
                     break;
                 default:
                     System.out.println("Invalid choice,please try again!");
-
 
             }
 
