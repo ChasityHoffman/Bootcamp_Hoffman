@@ -32,7 +32,7 @@ public class FileManager {
                 bufferedReader.close();
         }
         catch (Exception ex){
-           ex.printStackTrace();
+
         }
 
         return products;
