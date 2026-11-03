@@ -1,6 +1,7 @@
 package org.example.ui;
 
 import org.example.models.Transaction;
+import org.example.services.FileManager;
 import org.example.services.LedgerService;
 import java.util.Scanner;
 
@@ -8,9 +9,11 @@ public class UserInterface {
 
     private LedgerService ledgerService;
     private Scanner scanner;
+    private FileManager fileManager;
 
     public UserInterface() {
         ledgerService = new LedgerService();
+        fileManager = new FileManager();
         scanner = new Scanner(System.in);
     }
 

@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class FileManager {
     public ArrayList<Transaction> loadTransactions() {
@@ -14,8 +16,7 @@ public class FileManager {
 
         String fileName = "transactions.csv";             //variable that stores file name
 
-        try
-        {
+        try {
             BufferedReader bufferedReader =
                     new BufferedReader(new FileReader(fileName));
 
@@ -42,17 +43,37 @@ public class FileManager {
                 transactions.add(transaction);
             }
 
-                 bufferedReader.close();
-        }
-        catch (IOException e)
-        {
+            bufferedReader.close();
+        } catch (IOException e) {
             System.out.println("Error reading transaction file.");
         }
-
 
         return transactions;
 
     }
 
 
+    public void saveTransaction(Transaction transaction) {
+
+        String fileName = "transactions.csv";
+
+        try {
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(new FileWriter(fileName, true));
+
+            bufferedWriter.write(
+                    transaction.getDate() + "|" +
+                            transaction.getTime() + "|" +
+                            transaction.getDescription() + "|" +
+                            transaction.getVendor() + "|" +
+                            transaction.getAmount()
+            );
+                    bufferedWriter.newLine();             //every transaction gets its own line.
+
+                    bufferedWriter.close();
+
+        } catch (IOException e) {
+            System.out.println("Error saving transaction.");
+        }
+    }
 }
