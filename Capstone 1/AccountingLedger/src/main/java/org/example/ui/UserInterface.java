@@ -80,8 +80,32 @@ public class UserInterface {
 
     public void addPayment()
     {
-        System.out.println("Make Payment Screen");
-    }
+        System.out.println("\n===== MAKE PAYMENT =====\n");
+
+            System.out.print("Enter Description: ");
+            String description = scanner.nextLine();
+
+            System.out.print("Enter Vendor: ");
+            String vendor = scanner.nextLine();
+
+            System.out.print("Enter Amount: ");
+            double amount = Double.parseDouble(scanner.nextLine());
+
+            amount = -Math.abs(amount);
+
+            Transaction transaction = new Transaction(
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    description,
+                    vendor,
+                    amount
+            );
+
+            fileManager.saveTransaction(transaction);
+
+            System.out.println("\nPayment saved successfully.");
+        }
+
 
     public void displayLedgerMenu()
     {
@@ -133,6 +157,21 @@ public class UserInterface {
         }
     }
 
+    public void displayDeposits()
+    {
+        for (Transaction transaction : ledgerService.getDeposits())
+        {
+            System.out.println(transaction);
+        }
+    }
+
+    public void displayPayments()
+    {
+        for (Transaction transaction : ledgerService.getPayments())
+        {
+            System.out.println(transaction);
+        }
+    }
 
 
 
