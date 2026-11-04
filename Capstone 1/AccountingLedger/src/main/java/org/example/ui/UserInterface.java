@@ -9,9 +9,16 @@ import java.time.LocalTime;
 
 public class UserInterface {
 
-    private LedgerService ledgerService;
+    private LedgerService ledgerService;               //Fields
     private Scanner scanner;
     private FileManager fileManager;
+
+    private static final String RESET = "\u001B[0m";         //Changes the font color for the user
+    private static final String GREEN = "\u001B[32m";
+    private static final String RED = "\u001B[31m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String CYAN = "\u001B[36m";
+
 
     public UserInterface() {
         ledgerService = new LedgerService();
@@ -20,9 +27,13 @@ public class UserInterface {
     }
 
     public void displayHomeScreen() {       //Shows the main menu
-        System.out.println("Accounting Ledger\n");
-        System.out.println("D) Add Deposit");
-        System.out.println("P) Make Payment");
+        System.out.println(CYAN +
+                "=====================================\n" +
+                "         BUDGET TRACKER\n" +
+                "=====================================\n"
+                + RESET);
+        System.out.println(GREEN + "D) Add Deposit" + RESET);
+        System.out.println(RED + "P) Make Payment" + RESET);
         System.out.println("L) Ledger");
         System.out.println("X) Exit");
         System.out.print("\nSelect an option: ");
@@ -62,8 +73,19 @@ public class UserInterface {
             System.out.print("Enter Vendor: ");
             String vendor = scanner.nextLine();
 
-        System.out.print("Enter Amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
+        double amount;
+
+        try                                              //helps prevent the code from breaking
+        {                                               //in case the user puts an invalid submission
+            System.out.print("Enter Amount: ");
+            amount = Double.parseDouble(scanner.nextLine());
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("\nInvalid amount entered.");
+            displayHomeScreen();
+            return;
+        }
 
         Transaction transaction = new Transaction(
                 LocalDate.now(),
@@ -90,8 +112,19 @@ public class UserInterface {
             System.out.print("Enter Vendor: ");
             String vendor = scanner.nextLine();
 
+        double amount;
+
+        try
+        {
             System.out.print("Enter Amount: ");
-            double amount = Double.parseDouble(scanner.nextLine());
+            amount = Double.parseDouble(scanner.nextLine());
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("\nInvalid amount entered.");
+            displayHomeScreen();
+            return;
+        }
 
             amount = -Math.abs(amount);
 
@@ -162,6 +195,7 @@ public class UserInterface {
         System.out.println("3) Year To Date");
         System.out.println("4) Previous Year");
         System.out.println("5) Search By Vendor");
+        System.out.println("6) Custom Search");
         System.out.println("0) Back");
 
         System.out.print("\nSelect an option: ");
@@ -190,6 +224,10 @@ public class UserInterface {
                 searchByVendor();
                 break;
 
+            case "6":
+                customSearch();
+                break;
+
             case "0":
                 displayLedgerMenu();
                 break;
@@ -213,6 +251,85 @@ public class UserInterface {
             displayLedgerMenu();
         }
     }
+
+    public void customSearch()                         //filter transactions by start date, end date,
+    {                                                  //description, vendor, and amount.
+        System.out.println("\n===== CUSTOM SEARCH =====\n");
+
+        System.out.print("Start Date (YYYY-MM-DD): ");
+        String startDateInput = scanner.nextLine();
+
+        System.out.print("End Date (YYYY-MM-DD): ");
+        String endDateInput = scanner.nextLine();
+
+        System.out.print("Description: ");
+        String descriptionInput = scanner.nextLine();
+
+        System.out.print("Vendor: ");
+        String vendorInput = scanner.nextLine();
+
+        System.out.print("Amount: ");
+        String amountInput = scanner.nextLine();
+
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+
+        if (!startDateInput.isBlank())                 //Any fields left blank are ignored
+        {
+            startDate = LocalDate.parse(startDateInput);
+        }
+
+        if (!endDateInput.isBlank())
+        {
+            endDate = LocalDate.parse(endDateInput);
+        }
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            boolean matches = true;
+
+            if (!descriptionInput.isBlank())
+            {
+                matches = matches &&
+                        transaction.getDescription()
+                                .toLowerCase()
+                                .contains(descriptionInput.toLowerCase());
+            }
+
+            if (!vendorInput.isBlank())
+            {
+                matches = matches &&
+                        transaction.getVendor()
+                                .toLowerCase()
+                                .contains(vendorInput.toLowerCase());
+            }
+
+            if (!amountInput.isBlank())
+            {
+                double searchAmount = Double.parseDouble(amountInput);
+
+                matches = matches &&
+                        transaction.getAmount() == searchAmount;
+            }
+            if (startDate != null)
+            {
+                matches = matches &&
+                        !transaction.getDate().isBefore(startDate);
+            }
+
+            if (endDate != null)
+            {
+                matches = matches &&
+                        !transaction.getDate().isAfter(endDate);
+            }
+            if (matches)
+            {
+                System.out.println(transaction);
+            }
+        }
+    }
+
+
 
     public void displayMonthToDate()
     {
