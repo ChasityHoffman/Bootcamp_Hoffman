@@ -41,9 +41,15 @@ public class Transaction {                                      //Fields
     }
 
     @Override
-    public  String toString(){                              //printing the transaction
-        return date + " | " + time + " | " + description + " | " + vendor
-                + " | " + amount;
+    public String toString()              //printing the transaction
+    {
+        return date + " | " +
+                time.getHour() + ":" +
+                String.format("%02d", time.getMinute()) +
+                " | " +
+                description + " | " +
+                vendor + " | " +
+                amount;
     }
 }
 

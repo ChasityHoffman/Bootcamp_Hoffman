@@ -28,15 +28,15 @@ public class UserInterface {
 
     public void displayHomeScreen() {       //Shows the main menu
         System.out.println(CYAN +
-                "╔══════════════════════════════════════╗\n" +
+                "\n╔══════════════════════════════════════╗\n" +
                 "║          BUDGET TRACKER              ║\n" +
                 "║     Personal Finance Manager         ║\n" +
                 "╚══════════════════════════════════════╝\n"
                 + RESET);
         System.out.println(GREEN + "D) Add Deposit" + RESET);
         System.out.println(RED + "P) Make Payment" + RESET);
-        System.out.println("L) Ledger");
-        System.out.println("X) Exit");
+        System.out.println(YELLOW + "L) Ledger" + RESET);
+        System.out.println( CYAN + "X) Exit" + RESET);
         System.out.print("\nSelect an option: ");
         String choice = scanner.nextLine();
 
@@ -56,20 +56,35 @@ public class UserInterface {
 
             case "X":
                 System.out.println(CYAN +
-                        "\nThank you for using Budget Tracker!\n" +
-                        "Your transactions have been saved.\n"
+                        "\n╔════════════════════════════════════════════╗\n" +
+                        "║          THANK YOU FOR USING               ║\n" +
+                        "║            BUDGET TRACKER                  ║\n" +
+                        "╠════════════════════════════════════════════╣\n" +
+                        "║ Your transactions have been saved.         ║\n" +
+                        "║                                            ║\n" +
+                        "║ Your Personal Finance Manager hopes        ║\n" +
+                        "║ to see you back again soon!                ║\n" +
+                        "╚════════════════════════════════════════════╝\n"
                         + RESET);
                 break;
 
             default:
-                System.out.println("\nInvalid option.");
+                System.out.println(RED +
+                        "\nInvalid option. Please try again."  //brings User back to homescreen
+                        + RESET);
+
+                displayHomeScreen();
 
         }
     }
 
     public void addDeposit() {
 
-            System.out.println("\n===== ADD DEPOSIT =====\n");
+        System.out.println(GREEN +
+                "\n╔══════════════════════╗\n" +
+                "║     ADD DEPOSIT      ║\n" +
+                "╚══════════════════════╝\n"
+                + RESET);
 
             System.out.print("Enter Description: ");
             String description = scanner.nextLine();
@@ -110,7 +125,11 @@ public class UserInterface {
 
     public void addPayment()
     {
-        System.out.println(RED + "\n===== MAKE PAYMENT =====\n" + RESET);
+        System.out.println(RED +
+                "\n╔══════════════════════╗\n" +
+                "║    MAKE PAYMENT      ║\n" +
+                "╚══════════════════════╝\n"
+                + RESET);
 
             System.out.print("Enter Description: ");
             String description = scanner.nextLine();
@@ -155,7 +174,11 @@ public class UserInterface {
 
     public void displayLedgerMenu()
     {
-        System.out.println("\n===== LEDGER =====\n");
+        System.out.println(YELLOW +
+                "\n╔══════════════════════╗\n" +
+                "║       LEDGER         ║\n" +
+                "╚══════════════════════╝\n"
+                + RESET);
 
         System.out.println("A) All Transactions");
         System.out.println("D) Deposits Only");
@@ -190,13 +213,21 @@ public class UserInterface {
                 break;
 
             default:
-                System.out.println("Invalid Option");
+                System.out.println(RED +
+                        "\nInvalid option. Please try again."
+                        + RESET);
+
+                displayLedgerMenu();
         }
     }
 
     public void displayReportsMenu()
     {
-        System.out.println("\n===== REPORTS =====\n");
+        System.out.println(CYAN +
+                "\n╔══════════════════════╗\n" +
+                "║       REPORTS        ║\n" +
+                "╚══════════════════════╝\n"
+                + RESET);
 
         System.out.println("1) Month To Date");
         System.out.println("2) Previous Month");
@@ -241,7 +272,11 @@ public class UserInterface {
                 break;
 
             default:
-                System.out.println("Invalid Option");
+                System.out.println(RED +
+                        "\nInvalid option. Please try again."
+                        + RESET);
+
+                displayReportsMenu();
         }
     }
 
@@ -252,17 +287,24 @@ public class UserInterface {
 
         for (Transaction transaction : ledgerService.getAllTransactions())
         {
-            if (transaction.getVendor().equalsIgnoreCase(vendorSearch))
+            if (transaction.getVendor()
+                    .toLowerCase()
+                    .contains(vendorSearch.toLowerCase()))
             {
                 System.out.println(transaction);
             }
-            displayLedgerMenu();
         }
+
+        displayLedgerMenu();
     }
 
     public void customSearch()                         //filter transactions by start date, end date,
     {                                                  //description, vendor, and amount.
-        System.out.println("\n===== CUSTOM SEARCH =====\n");
+        System.out.println(CYAN +
+                "\n╔══════════════════════════════╗\n" +
+                "║       CUSTOM SEARCH          ║\n" +
+                "╚══════════════════════════════╝\n"
+                + RESET);
 
         System.out.print("Start Date (YYYY-MM-DD): ");
         String startDateInput = scanner.nextLine();
@@ -335,6 +377,7 @@ public class UserInterface {
                 System.out.println(transaction);
             }
         }
+        displayReportsMenu();
     }
 
 
@@ -350,8 +393,8 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
-            displayLedgerMenu();
         }
+        displayLedgerMenu();
     }
 
     public void displayPreviousMonth()
@@ -365,8 +408,8 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
-            displayLedgerMenu();
         }
+        displayLedgerMenu();
     }
 
     public void displayYearToDate()
@@ -379,8 +422,8 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
-            displayLedgerMenu();
         }
+        displayLedgerMenu();
     }
 
     public void displayPreviousYear()
@@ -393,8 +436,8 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
-            displayLedgerMenu();
         }
+        displayLedgerMenu();
 
     }
 
