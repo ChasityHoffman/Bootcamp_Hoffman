@@ -18,7 +18,14 @@ public class LedgerService {
     public ArrayList<Transaction> getAllTransactions()          //Returns the complete list of
                                                                // transactions loaded from the CSV file
     {
-        return transactions;
+        ArrayList<Transaction> reversedTransactions = new ArrayList<>();   //Makes the list newest to oldest
+
+        for (int i = transactions.size() - 1; i >= 0; i--)
+        {
+            reversedTransactions.add(transactions.get(i));
+        }
+
+        return reversedTransactions;
     }
 
     public ArrayList<Transaction> getDeposits()            //Loops through all transactions and returns
@@ -26,8 +33,10 @@ public class LedgerService {
     {
         ArrayList<Transaction> deposits = new ArrayList<>();
 
-        for (Transaction transaction : transactions)
+        for (int i = transactions.size() - 1; i >= 0; i--)
         {
+            Transaction transaction = transactions.get(i);
+
             if (transaction.getAmount() > 0)
             {
                 deposits.add(transaction);
@@ -42,8 +51,10 @@ public class LedgerService {
     {
         ArrayList<Transaction> payments = new ArrayList<>();
 
-        for (Transaction transaction : transactions)
+        for (int i = transactions.size() - 1; i >= 0; i--)
         {
+            Transaction transaction = transactions.get(i);
+
             if (transaction.getAmount() < 0)
             {
                 payments.add(transaction);

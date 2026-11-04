@@ -76,6 +76,8 @@ public class UserInterface {
         fileManager.saveTransaction(transaction);
 
         System.out.println("\nDeposit saved successfully.");
+
+        displayHomeScreen();                                  //keeps the program running
     }
 
     public void addPayment()
@@ -104,7 +106,10 @@ public class UserInterface {
             fileManager.saveTransaction(transaction);
 
             System.out.println("\nPayment saved successfully.");
-        }
+
+        displayHomeScreen();                               //keeps the program running
+
+    }
 
 
     public void displayLedgerMenu()
@@ -128,11 +133,11 @@ public class UserInterface {
                 break;
 
             case "D":
-                System.out.println("Deposits Selected");
+                displayDeposits();
                 break;
 
             case "P":
-                System.out.println("Payments Selected");
+                displayPayments();
                 break;
 
             case "R":
@@ -170,15 +175,15 @@ public class UserInterface {
                 break;
 
             case "2":
-                System.out.println("Previous Month Report");
+                displayPreviousMonth();
                 break;
 
             case "3":
-                System.out.println("Year To Date Report");
+                displayYearToDate();
                 break;
 
             case "4":
-                System.out.println("Previous Year Report");
+                displayPreviousYear();
                 break;
 
             case "5":
@@ -205,6 +210,7 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
+            displayLedgerMenu();
         }
     }
 
@@ -219,7 +225,52 @@ public class UserInterface {
             {
                 System.out.println(transaction);
             }
+            displayLedgerMenu();
         }
+    }
+
+    public void displayPreviousMonth()
+    {
+        LocalDate previousMonth = LocalDate.now().minusMonths(1);
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            if (transaction.getDate().getMonth() == previousMonth.getMonth()
+                    && transaction.getDate().getYear() == previousMonth.getYear())
+            {
+                System.out.println(transaction);
+            }
+            displayLedgerMenu();
+        }
+    }
+
+    public void displayYearToDate()
+    {
+        int currentYear = LocalDate.now().getYear();
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            if (transaction.getDate().getYear() == currentYear)
+            {
+                System.out.println(transaction);
+            }
+            displayLedgerMenu();
+        }
+    }
+
+    public void displayPreviousYear()
+    {
+        int previousYear = LocalDate.now().minusYears(1).getYear();
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            if (transaction.getDate().getYear() == previousYear)
+            {
+                System.out.println(transaction);
+            }
+            displayLedgerMenu();
+        }
+
     }
 
     public void displayAllTransactions()     //Prints every transaction from the ArrayList
@@ -229,6 +280,9 @@ public class UserInterface {
             System.out.println(transaction);
 
         }
+
+        displayLedgerMenu();
+
     }
 
     public void displayDeposits()
@@ -237,6 +291,9 @@ public class UserInterface {
         {
             System.out.println(transaction);
         }
+
+        displayLedgerMenu();
+
     }
 
     public void displayPayments()
@@ -245,6 +302,9 @@ public class UserInterface {
         {
             System.out.println(transaction);
         }
+
+        displayLedgerMenu();
+
     }
 
 
