@@ -136,7 +136,7 @@ public class UserInterface {
                 break;
 
             case "R":
-                System.out.println("Reports Selected");
+                displayReportsMenu();
                 break;
 
             case "H":
@@ -145,6 +145,66 @@ public class UserInterface {
 
             default:
                 System.out.println("Invalid Option");
+        }
+    }
+
+    public void displayReportsMenu()
+    {
+        System.out.println("\n===== REPORTS =====\n");
+
+        System.out.println("1) Month To Date");
+        System.out.println("2) Previous Month");
+        System.out.println("3) Year To Date");
+        System.out.println("4) Previous Year");
+        System.out.println("5) Search By Vendor");
+        System.out.println("0) Back");
+
+        System.out.print("\nSelect an option: ");
+
+        String choice = scanner.nextLine();
+
+        switch (choice)
+        {
+            case "1":
+                System.out.println("Month To Date Report");
+                break;
+
+            case "2":
+                System.out.println("Previous Month Report");
+                break;
+
+            case "3":
+                System.out.println("Year To Date Report");
+                break;
+
+            case "4":
+                System.out.println("Previous Year Report");
+                break;
+
+            case "5":
+                searchByVendor();
+                break;
+
+            case "0":
+                displayLedgerMenu();
+                break;
+
+            default:
+                System.out.println("Invalid Option");
+        }
+    }
+
+    public void searchByVendor()
+    {
+        System.out.print("\nEnter Vendor Name: ");
+        String vendorSearch = scanner.nextLine();
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            if (transaction.getVendor().equalsIgnoreCase(vendorSearch))
+            {
+                System.out.println(transaction);
+            }
         }
     }
 
