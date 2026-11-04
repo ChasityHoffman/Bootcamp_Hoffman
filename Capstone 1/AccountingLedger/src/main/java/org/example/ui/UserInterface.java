@@ -166,7 +166,7 @@ public class UserInterface {
         switch (choice)
         {
             case "1":
-                System.out.println("Month To Date Report");
+                displayMonthToDate();
                 break;
 
             case "2":
@@ -202,6 +202,20 @@ public class UserInterface {
         for (Transaction transaction : ledgerService.getAllTransactions())
         {
             if (transaction.getVendor().equalsIgnoreCase(vendorSearch))
+            {
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public void displayMonthToDate()
+    {
+        LocalDate today = LocalDate.now();
+
+        for (Transaction transaction : ledgerService.getAllTransactions())
+        {
+            if (transaction.getDate().getMonth() == today.getMonth()
+                    && transaction.getDate().getYear() == today.getYear())
             {
                 System.out.println(transaction);
             }
