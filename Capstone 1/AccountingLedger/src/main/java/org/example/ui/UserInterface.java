@@ -4,6 +4,8 @@ import org.example.models.Transaction;
 import org.example.services.FileManager;
 import org.example.services.LedgerService;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class UserInterface {
 
@@ -51,7 +53,29 @@ public class UserInterface {
     }
 
     public void addDeposit() {
-        System.out.println("Add Deposit Screen");
+
+            System.out.println("\n===== ADD DEPOSIT =====\n");
+
+            System.out.print("Enter Description: ");
+            String description = scanner.nextLine();
+
+            System.out.print("Enter Vendor: ");
+            String vendor = scanner.nextLine();
+
+        System.out.print("Enter Amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
+
+        Transaction transaction = new Transaction(
+                LocalDate.now(),
+                LocalTime.now(),
+                description,
+                vendor,
+                amount
+        );
+
+        fileManager.saveTransaction(transaction);
+
+        System.out.println("\nDeposit saved successfully.");
     }
 
     public void addPayment()
@@ -105,6 +129,7 @@ public class UserInterface {
         for (Transaction transaction : ledgerService.getAllTransactions())
         {
             System.out.println(transaction);
+
         }
     }
 
