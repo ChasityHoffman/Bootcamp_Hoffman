@@ -28,9 +28,10 @@ public class UserInterface {
 
     public void displayHomeScreen() {       //Shows the main menu
         System.out.println(CYAN +
-                "=====================================\n" +
-                "         BUDGET TRACKER\n" +
-                "=====================================\n"
+                "╔══════════════════════════════════════╗\n" +
+                "║          BUDGET TRACKER              ║\n" +
+                "║     Personal Finance Manager         ║\n" +
+                "╚══════════════════════════════════════╝\n"
                 + RESET);
         System.out.println(GREEN + "D) Add Deposit" + RESET);
         System.out.println(RED + "P) Make Payment" + RESET);
@@ -54,7 +55,10 @@ public class UserInterface {
 
 
             case "X":
-                System.out.println("\nGoodbye!");
+                System.out.println(CYAN +
+                        "\nThank you for using Budget Tracker!\n" +
+                        "Your transactions have been saved.\n"
+                        + RESET);
                 break;
 
             default:
@@ -97,14 +101,16 @@ public class UserInterface {
 
         fileManager.saveTransaction(transaction);
 
-        System.out.println("\nDeposit saved successfully.");
+        System.out.println(GREEN +
+                "\n✓ Deposit saved successfully!"
+                + RESET);
 
         displayHomeScreen();                                  //keeps the program running
     }
 
     public void addPayment()
     {
-        System.out.println("\n===== MAKE PAYMENT =====\n");
+        System.out.println(RED + "\n===== MAKE PAYMENT =====\n" + RESET);
 
             System.out.print("Enter Description: ");
             String description = scanner.nextLine();
@@ -138,7 +144,9 @@ public class UserInterface {
 
             fileManager.saveTransaction(transaction);
 
-            System.out.println("\nPayment saved successfully.");
+        System.out.println(RED +
+                "\n✓ Payment saved successfully!"
+                + RESET);
 
         displayHomeScreen();                               //keeps the program running
 
@@ -394,7 +402,14 @@ public class UserInterface {
     {
         for (Transaction transaction : ledgerService.getAllTransactions())
         {
-            System.out.println(transaction);
+            if (transaction.getAmount() > 0)
+            {
+                System.out.println(GREEN + transaction + RESET);      //color coded deposit adding
+            }                                                         //subtracting money
+            else
+            {
+                System.out.println(RED + transaction + RESET);
+            }
 
         }
 
@@ -403,25 +418,24 @@ public class UserInterface {
     }
 
     public void displayDeposits()
+
     {
         for (Transaction transaction : ledgerService.getDeposits())
         {
-            System.out.println(transaction);
+            System.out.println(GREEN + transaction + RESET);
         }
 
         displayLedgerMenu();
-
     }
 
     public void displayPayments()
     {
         for (Transaction transaction : ledgerService.getPayments())
         {
-            System.out.println(transaction);
+            System.out.println(RED + transaction + RESET);
         }
 
         displayLedgerMenu();
-
     }
 
 
