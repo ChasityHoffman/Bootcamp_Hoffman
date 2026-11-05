@@ -14,7 +14,7 @@ public class FileManager {
     public ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
 
-        String fileName = "transactions.csv";             //variable that stores file name
+        String fileName = "AccountingLedger/src/main/resources/transactions.csv";             //variable that stores file name
 
         try {
             BufferedReader bufferedReader =
@@ -55,7 +55,7 @@ public class FileManager {
 
     public void saveTransaction(Transaction transaction) {
 
-        String fileName = "transactions.csv";
+        String fileName = "AccountingLedger/src/main/resources/transactions.csv";
 
         try {
             BufferedWriter bufferedWriter =
