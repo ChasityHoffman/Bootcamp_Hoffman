@@ -3,14 +3,14 @@ package org.example.models;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Transaction {                                      //Fields
+public class Transaction {
     private LocalDate date;
     private LocalTime time;
     private String description;
     private String vendor;
     private double amount;
 
-    public Transaction(LocalDate date, LocalTime time,           //Constructor
+    public Transaction(LocalDate date, LocalTime time,
                        String description,
                        String vendor, double amount) {
         this.date = date;
@@ -20,8 +20,8 @@ public class Transaction {                                      //Fields
         this.amount = amount;
     }
 
-    public LocalDate getDate() {                                //Getters
-        return date;
+    public LocalDate getDate() {
+        return date;                                       //Stores the transaction date.
     }
 
     public LocalTime getTime() {
@@ -40,12 +40,12 @@ public class Transaction {                                      //Fields
         return amount;
     }
 
-    @Override
-    public String toString()              //printing the transaction
+    @Override                           // Transaction objects are displayed when printed.
+    public String toString()
     {
         return date + " | " +
                 time.getHour() + ":" +
-                String.format("%02d", time.getMinute()) +
+                String.format("%02d", time.getMinute()) +    //Always display two digits.
                 " | " +
                 description + " | " +
                 vendor + " | " +

@@ -1,6 +1,6 @@
 package org.example.services;
 
-import org.example.models.Transaction;
+import org.example.models.Transaction;   //create and save Transaction objects.
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,7 +22,7 @@ public class FileManager {
 
             String line;
 
-            while ((line = bufferedReader.readLine()) != null)   //reads the file
+            while ((line = bufferedReader.readLine()) != null)
             {
 
                 String[] parts = line.split("\\|");     //break each line into individual values

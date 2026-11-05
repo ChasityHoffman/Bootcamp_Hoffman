@@ -15,7 +15,7 @@ public class UserInterface {
 
     private static final String RESET = "\u001B[0m";         //Changes the font color for the user
     private static final String GREEN = "\u001B[32m";
-    private static final String RED = "\u001B[31m";
+    private static final String PURPLE = "\u001B[35m";
     private static final String YELLOW = "\u001B[33m";
     private static final String CYAN = "\u001B[36m";
 
@@ -33,11 +33,12 @@ public class UserInterface {
                 "║     Personal Finance Manager         ║\n" +
                 "╚══════════════════════════════════════╝\n"
                 + RESET);
-        System.out.println(GREEN + "D) Add Deposit" + RESET);
-        System.out.println(RED + "P) Make Payment" + RESET);
-        System.out.println(YELLOW + "L) Ledger" + RESET);
-        System.out.println( CYAN + "X) Exit" + RESET);
-        System.out.print("\nSelect an option: ");
+        System.out.println(GREEN + "D)" + RESET + " Add Deposit");
+        System.out.println(PURPLE + "P)" + RESET + " Make Payment");
+        System.out.println(YELLOW + "L)" + RESET + " Ledger");
+        System.out.println(CYAN + "X)" + RESET + " Exit");
+        System.out.print(CYAN + "\nSelect an option: " + RESET);
+
         String choice = scanner.nextLine();
 
         switch (choice.toUpperCase()) {
@@ -69,7 +70,7 @@ public class UserInterface {
                 break;
 
             default:
-                System.out.println(RED +
+                System.out.println(PURPLE +
                         "\nInvalid option. Please try again."  //brings User back to homescreen
                         + RESET);
 
@@ -125,7 +126,7 @@ public class UserInterface {
 
     public void addPayment()
     {
-        System.out.println(RED +
+        System.out.println(PURPLE +
                 "\n╔══════════════════════╗\n" +
                 "║    MAKE PAYMENT      ║\n" +
                 "╚══════════════════════╝\n"
@@ -163,7 +164,7 @@ public class UserInterface {
 
             fileManager.saveTransaction(transaction);
 
-        System.out.println(RED +
+        System.out.println(PURPLE +
                 "\n✓ Payment saved successfully!"
                 + RESET);
 
@@ -180,11 +181,11 @@ public class UserInterface {
                 "╚══════════════════════╝\n"
                 + RESET);
 
-        System.out.println("A) All Transactions");
-        System.out.println("D) Deposits Only");
-        System.out.println("P) Payments Only");
-        System.out.println("R) Reports");
-        System.out.println("H) Home");
+        System.out.println(YELLOW + "A)" + RESET + " All Transactions");
+        System.out.println(YELLOW + "D)" + RESET + " Deposits");
+        System.out.println(YELLOW + "P)" + RESET + " Payments");
+        System.out.println(YELLOW + "R)" + RESET + " Reports");
+        System.out.println(YELLOW + "H)" + RESET + " Home");
 
         System.out.print("\nSelect an option: ");
 
@@ -213,7 +214,7 @@ public class UserInterface {
                 break;
 
             default:
-                System.out.println(RED +
+                System.out.println(PURPLE +
                         "\nInvalid option. Please try again."
                         + RESET);
 
@@ -229,13 +230,13 @@ public class UserInterface {
                 "╚══════════════════════╝\n"
                 + RESET);
 
-        System.out.println("1) Month To Date");
-        System.out.println("2) Previous Month");
-        System.out.println("3) Year To Date");
-        System.out.println("4) Previous Year");
-        System.out.println("5) Search By Vendor");
-        System.out.println("6) Custom Search");
-        System.out.println("0) Back");
+        System.out.println(CYAN + "1)" + RESET + " Month To Date");
+        System.out.println(CYAN + "2)" + RESET + " Previous Month");
+        System.out.println(CYAN + "3)" + RESET + " Year To Date");
+        System.out.println(CYAN + "4)" + RESET + " Previous Year");
+        System.out.println(CYAN + "5)" + RESET + " Search By Vendor");
+        System.out.println(CYAN + "6)" + RESET + " Custom Search");
+        System.out.println(CYAN + "0)" + RESET + " Back");
 
         System.out.print("\nSelect an option: ");
 
@@ -272,7 +273,7 @@ public class UserInterface {
                 break;
 
             default:
-                System.out.println(RED +
+                System.out.println(PURPLE +
                         "\nInvalid option. Please try again."
                         + RESET);
 
@@ -451,7 +452,7 @@ public class UserInterface {
             }                                                         //subtracting money
             else
             {
-                System.out.println(RED + transaction + RESET);
+                System.out.println(PURPLE + transaction + RESET);
             }
 
         }
@@ -475,7 +476,7 @@ public class UserInterface {
     {
         for (Transaction transaction : ledgerService.getPayments())
         {
-            System.out.println(RED + transaction + RESET);
+            System.out.println(PURPLE + transaction + RESET);
         }
 
         displayLedgerMenu();
