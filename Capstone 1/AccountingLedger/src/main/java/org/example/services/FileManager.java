@@ -14,18 +14,23 @@ public class FileManager {
     public ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
 
-        String fileName = "AccountingLedger/src/main/resources/transactions.csv";             //variable that stores file name
+        String fileName =
+                "src/main/resources/transactions.csv";
+
 
         try {
             BufferedReader bufferedReader =
                     new BufferedReader(new FileReader(fileName));
 
             String line;
-
             while ((line = bufferedReader.readLine()) != null)
             {
+                if (line.isBlank())
+                {
+                    continue;
+                }
 
-                String[] parts = line.split("\\|");     //break each line into individual values
+                String[] parts = line.split("\\|");    //break each line into individual values
 
                 LocalDate date = LocalDate.parse(parts[0]);
                 LocalTime time = LocalTime.parse(parts[1]);
@@ -41,6 +46,7 @@ public class FileManager {
                         amount);
 
                 transactions.add(transaction);
+
             }
 
             bufferedReader.close();
@@ -55,7 +61,8 @@ public class FileManager {
 
     public void saveTransaction(Transaction transaction) {
 
-        String fileName = "AccountingLedger/src/main/resources/transactions.csv";
+        String fileName =
+                "src/main/resources/transactions.csv";
 
         try {
             BufferedWriter bufferedWriter =

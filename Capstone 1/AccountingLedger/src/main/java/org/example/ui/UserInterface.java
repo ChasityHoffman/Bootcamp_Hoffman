@@ -218,8 +218,9 @@ public class UserInterface {
                         "\nInvalid option. Please try again."
                         + RESET);
 
-                displayLedgerMenu();
+
         }
+        //displayLedgerMenu();
     }
 
     public void displayReportsMenu()
