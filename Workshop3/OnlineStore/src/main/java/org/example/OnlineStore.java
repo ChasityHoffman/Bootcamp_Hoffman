@@ -82,6 +82,7 @@ public class OnlineStore
 
     public void displayProducts()
     {
+
         System.out.println(PURPLE +
                 "\n╔══════════════════════════════╗\n" +
                 "║      STORE PRODUCTS          ║\n" +
@@ -98,8 +99,47 @@ public class OnlineStore
             );
         }
 
-        System.out.println("\nPress Enter to continue...");
+        System.out.println(PURPLE +
+                "\n╔══════════════════════════════╗\n" +
+                "║       PRODUCT MENU          ║\n" +
+                "╚══════════════════════════════╝\n"
+                + RESET);
+
+        System.out.println(PURPLE + "1)" + RESET + " Add Product To Cart");
+        System.out.println(PURPLE + "2)" + RESET + " Search By Name");
+        System.out.println(PURPLE + "3)" + RESET + " Search By Department");
+        System.out.println(PURPLE + "4)" + RESET + " Search By Price Range");
+        System.out.println(PURPLE + "5)" + RESET + " Back");
+
+        System.out.print(CYAN + "\nSelect an option: " + RESET);
+
+        int choice = scanner.nextInt();
         scanner.nextLine();
+
+        switch (choice)
+        {
+            case 1:
+                System.out.println("Add To Cart Selected");
+                break;
+
+            case 2:
+                System.out.println("Search By Name Selected");
+                break;
+
+            case 3:
+                System.out.println("Search By Department Selected");
+                break;
+
+            case 4:
+                System.out.println("Search By Price Range Selected");
+                break;
+
+            case 5:
+                return;
+
+            default:
+                System.out.println("Invalid option.");
+        }
     }
 }
 

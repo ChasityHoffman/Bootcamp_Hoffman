@@ -10,7 +10,9 @@ public class FileManager {
         List<Product> products = new ArrayList<>();
 
         try {
-            FileReader fileReader = new FileReader("src/main/resources/products.csv");
+
+            FileReader fileReader =
+                    new FileReader("main/resources/products.csv");
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -31,8 +33,9 @@ public class FileManager {
             }
                 bufferedReader.close();
         }
-        catch (Exception ex){
-
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
 
         return products;
