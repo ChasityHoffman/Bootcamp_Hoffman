@@ -1,6 +1,5 @@
 package org.example;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,11 +10,12 @@ public class OnlineStore
     private static final String YELLOW = "\u001B[33m";
     private static final String CYAN = "\u001B[36m";
     private static final String PURPLE = "\u001B[35m";
-    private List<Product> inventory;                //Stores all products loaded from
+
+    private List<Product> inventory;
     private ShoppingCart cart;
     private Scanner scanner;
 
-    public OnlineStore()                        //Constructor
+    public OnlineStore()
     {
         inventory = FileManager.getProducts();
         cart = new ShoppingCart();
@@ -35,8 +35,8 @@ public class OnlineStore
         {
             System.out.println(CYAN +
                     "\n╔══════════════════════════════╗\n" +
-                    "║        ONLINE STORE          ║\n" +
-                    "║      Shop With Ease          ║\n" +
+                    "║        ONLINE STORE         ║\n" +
+                    "║       Shop With Ease        ║\n" +
                     "╚══════════════════════════════╝\n"
                     + RESET);
 
@@ -49,8 +49,6 @@ public class OnlineStore
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-
-
             switch (choice)
             {
                 case 1:
@@ -58,16 +56,14 @@ public class OnlineStore
                     break;
 
                 case 2:
-                    System.out.println("Display Cart Selected");
+                    displayCart();
                     break;
 
                 case 3:
                     System.out.println(CYAN +
                             "\n╔══════════════════════════════════╗\n" +
-                            "║   THANK YOU FOR VISITING THE     ║\n" +
-                            "║          ONLINE STORE            ║\n" +
-                            "╠══════════════════════════════════╣\n" +
-                            "║ We hope to see you again soon!   ║\n" +
+                            "║   THANK YOU FOR VISITING THE    ║\n" +
+                            "║         ONLINE STORE           ║\n" +
                             "╚══════════════════════════════════╝\n"
                             + RESET);
 
@@ -75,17 +71,16 @@ public class OnlineStore
                     break;
 
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("Invalid option.");
             }
         }
     }
 
     public void displayProducts()
     {
-
         System.out.println(PURPLE +
                 "\n╔══════════════════════════════╗\n" +
-                "║      STORE PRODUCTS          ║\n" +
+                "║      STORE PRODUCTS         ║\n" +
                 "╚══════════════════════════════╝\n"
                 + RESET);
 
@@ -95,8 +90,7 @@ public class OnlineStore
                     product.getSKU() + " | " +
                             product.getProductName() + " | $" +
                             product.getPrice() + " | " +
-                            product.getDepartment()
-            );
+                            product.getDepartment());
         }
 
         System.out.println(PURPLE +
@@ -119,19 +113,19 @@ public class OnlineStore
         switch (choice)
         {
             case 1:
-                System.out.println("Add To Cart Selected");
+                addProductToCart();
                 break;
 
             case 2:
-                System.out.println("Search By Name Selected");
+                searchByName();
                 break;
 
             case 3:
-                System.out.println("Search By Department Selected");
+                searchByDepartment();
                 break;
 
             case 4:
-                System.out.println("Search By Price Range Selected");
+                searchByPriceRange();
                 break;
 
             case 5:
@@ -140,6 +134,200 @@ public class OnlineStore
             default:
                 System.out.println("Invalid option.");
         }
+    }
+
+    public void addProductToCart()
+    {
+        System.out.print("\nEnter SKU: ");
+
+        String sku = scanner.nextLine();
+
+        boolean found = false;
+
+        for (Product product : inventory)
+        {
+            if (product.getSKU().equalsIgnoreCase(sku))
+            {
+                cart.addToCart(product);
+
+                System.out.println(
+                        "\n" + product.getProductName()
+                                + " added to cart!");
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            System.out.println("Product not found.");
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+    }
+
+    public void displayCart()
+    {
+        System.out.println(YELLOW +
+                "\n╔══════════════════════════════╗\n" +
+                "║       SHOPPING CART         ║\n" +
+                "╚══════════════════════════════╝\n"
+                + RESET);
+
+        if (cart.cart.isEmpty())
+        {
+            System.out.println("Your cart is empty.");
+        }
+        else
+        {
+            for (Product product : cart.cart)
+            {
+                System.out.println(
+                        product.getSKU() + " | " +
+                                product.getProductName() +
+                                " | $" + product.getPrice());
+            }
+
+            System.out.println(
+                    "\nCart Total: $" +
+                            cart.getCartTotal());
+
+            System.out.println();
+            System.out.println(YELLOW + "1)" + RESET + " Remove Product");
+            System.out.println(YELLOW + "2)" + RESET + " Back");
+
+            System.out.print(CYAN + "\nSelect an option: " + RESET);
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice)
+            {
+                case 1:
+                    removeProductFromCart();
+                    break;
+
+                case 2:
+                    return;
+
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+    }
+
+    public void removeProductFromCart()
+    {
+        System.out.print("\nEnter SKU to remove: ");
+
+        String sku = scanner.nextLine();
+
+        boolean found = false;
+
+        for (Product product : cart.cart)
+        {
+            if (product.getSKU().equalsIgnoreCase(sku))
+            {
+                cart.removeFromCart(product);
+
+                System.out.println(
+                        product.getProductName()
+                                + " removed from cart.");
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            System.out.println("Product not found in cart.");
+        }
+    }
+
+    public void searchByName()
+    {
+        System.out.print("\nEnter Product Name: ");
+
+        String searchName = scanner.nextLine();
+
+        System.out.println(PURPLE + "\nSEARCH RESULTS\n" + RESET);
+
+        for (Product product : inventory)
+        {
+            if (product.getProductName()
+                    .toLowerCase()
+                    .contains(searchName.toLowerCase()))
+            {
+                System.out.println(
+                        product.getSKU() + " | " +
+                                product.getProductName() +
+                                " | $" + product.getPrice());
+            }
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+    }
+
+    public void searchByDepartment()
+    {
+        System.out.print("\nEnter Department: ");
+
+        String departmentSearch = scanner.nextLine();
+
+        System.out.println(PURPLE + "\nSEARCH RESULTS\n" + RESET);
+
+        for (Product product : inventory)
+        {
+            if (product.getDepartment()
+                    .toLowerCase()
+                    .contains(departmentSearch.toLowerCase()))
+            {
+                System.out.println(
+                        product.getSKU() + " | " +
+                                product.getProductName() +
+                                " | $" + product.getPrice() +
+                                " | " + product.getDepartment());
+            }
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+    }
+
+    public void searchByPriceRange()
+    {
+        System.out.print("\nEnter Minimum Price: ");
+        double minPrice =
+                Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Enter Maximum Price: ");
+        double maxPrice =
+                Double.parseDouble(scanner.nextLine());
+
+        System.out.println(PURPLE + "\nSEARCH RESULTS\n" + RESET);
+
+        for (Product product : inventory)
+        {
+            if (product.getPrice() >= minPrice
+                    && product.getPrice() <= maxPrice)
+            {
+                System.out.println(
+                        product.getSKU() + " | " +
+                                product.getProductName() +
+                                " | $" + product.getPrice() +
+                                " | " + product.getDepartment());
+            }
+        }
+
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
     }
 }
 
