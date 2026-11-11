@@ -35,8 +35,8 @@ public class OnlineStore
         {
             System.out.println(CYAN +
                     "\n╔══════════════════════════════╗\n" +
-                    "║        ONLINE STORE         ║\n" +
-                    "║       Shop With Ease        ║\n" +
+                    "║        ONLINE STORE          ║\n" +
+                    "║       Shop With Ease         ║\n" +
                     "╚══════════════════════════════╝\n"
                     + RESET);
 
@@ -62,8 +62,8 @@ public class OnlineStore
                 case 3:
                     System.out.println(CYAN +
                             "\n╔══════════════════════════════════╗\n" +
-                            "║   THANK YOU FOR VISITING THE    ║\n" +
-                            "║         ONLINE STORE           ║\n" +
+                            "║   THANK YOU FOR VISITING THE     ║\n" +
+                            "║         ONLINE STORE             ║\n" +
                             "╚══════════════════════════════════╝\n"
                             + RESET);
 
@@ -80,7 +80,7 @@ public class OnlineStore
     {
         System.out.println(PURPLE +
                 "\n╔══════════════════════════════╗\n" +
-                "║      STORE PRODUCTS         ║\n" +
+                "║      STORE PRODUCTS          ║\n" +
                 "╚══════════════════════════════╝\n"
                 + RESET);
 
@@ -95,7 +95,7 @@ public class OnlineStore
 
         System.out.println(PURPLE +
                 "\n╔══════════════════════════════╗\n" +
-                "║       PRODUCT MENU          ║\n" +
+                "║       PRODUCT MENU           ║\n" +
                 "╚══════════════════════════════╝\n"
                 + RESET);
 
