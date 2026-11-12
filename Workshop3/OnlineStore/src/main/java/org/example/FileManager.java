@@ -12,7 +12,7 @@ public class FileManager {
         try {
 
             FileReader fileReader =
-                    new FileReader("C:\\BootCamp\\Bootcamp_Hoffman\\Workshop3\\OnlineStore\\src\\main\\resources\\products.csv");
+                    new FileReader("OnlineStore/src/main/resources/products.csv");
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
