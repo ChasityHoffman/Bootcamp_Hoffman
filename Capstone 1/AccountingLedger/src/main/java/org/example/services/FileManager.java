@@ -27,7 +27,7 @@ public class FileManager {
             {
                 if (line.isBlank())
                 {
-                    continue;
+                    continue; //if there blank entry in csv, it moves onto the next line
                 }
 
                 String[] parts = line.split("\\|");    //break each line into individual values
