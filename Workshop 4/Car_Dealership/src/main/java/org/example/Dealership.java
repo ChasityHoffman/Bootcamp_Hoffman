@@ -16,7 +16,7 @@ public class Dealership {
     }
 
 
-    public void addVehicle(Vehicle vehicle) {
+    public void addVehicle(Vehicle vehicle) { //method to add the vehicle
         inventory.add(vehicle);
     }
 
@@ -24,6 +24,56 @@ public class Dealership {
         return inventory;
     }
 
+    public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
+        return null;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        return null;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
+        return null;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByColor(String color) {
+        return null;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
+        return null;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByType(String vehicleType) {
+        return null;
+    }
+    public void removeVehicle(Vehicle vehicle) {
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
 
 
