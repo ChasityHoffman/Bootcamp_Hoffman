@@ -16,7 +16,7 @@ public class Dealership {
     }
 
 
-    public void addVehicle(Vehicle vehicle) { //method to add the vehicle
+    public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }
 
