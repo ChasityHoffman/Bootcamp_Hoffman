@@ -1,7 +1,9 @@
 package org.example;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class DealershipFileManager
@@ -18,9 +20,12 @@ public class DealershipFileManager
                     new BufferedReader(
                             new FileReader(fileName));
 
-            String dealershipLine = bufferedReader.readLine();
+            String dealershipLine =
+                    bufferedReader.readLine();
+
             String[] dealershipParts =
                     dealershipLine.split("\\|");
+
             String name = dealershipParts[0];
             String address = dealershipParts[1];
             String phone = dealershipParts[2];
@@ -56,21 +61,61 @@ public class DealershipFileManager
                         color,
                         odometer,
                         price);
+
                 dealership.addVehicle(vehicle);
             }
+
             bufferedReader.close();
         }
         catch (IOException e)
         {
-            System.out.println("Error reading inventory file.");
+            System.out.println(
+                    "Error reading inventory file.");
         }
 
         return dealership;
-
     }
 
     public void saveDealership(Dealership dealership)
     {
+        String fileName =
+                "src/main/resources/inventory.csv";
 
+        try
+        {
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(
+                            new FileWriter(fileName));
+
+            bufferedWriter.write(
+                    dealership.getName() + "|" +
+                            dealership.getAddress() + "|" +
+                            dealership.getPhone());
+
+            bufferedWriter.newLine();
+
+            for (Vehicle vehicle :
+                    dealership.getAllVehicles())
+            {
+                bufferedWriter.write(
+                        vehicle.getVin() + "|" +
+                                vehicle.getYear() + "|" +
+                                vehicle.getMake() + "|" +
+                                vehicle.getModel() + "|" +
+                                vehicle.getVehicleType() + "|" +
+                                vehicle.getColor() + "|" +
+                                vehicle.getOdometer() + "|" +
+                                vehicle.getPrice());
+
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(
+                    "Error saving inventory file.");
+        }
     }
 }
