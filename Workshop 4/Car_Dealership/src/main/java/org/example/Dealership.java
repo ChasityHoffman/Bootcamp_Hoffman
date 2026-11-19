@@ -2,77 +2,179 @@ package org.example;
 
 import java.util.ArrayList;
 
-public class Dealership {
-
+public class Dealership
+{
     private String name;
     private String address;
     private String phone;
     private ArrayList<Vehicle> inventory;
-    public Dealership(String name, String address, String phone) {
+
+    public Dealership(String name,
+                      String address,
+                      String phone)
+    {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.inventory = new ArrayList<>();
     }
 
-
-    public void addVehicle(Vehicle vehicle) {
+    public void addVehicle(Vehicle vehicle)
+    {
         inventory.add(vehicle);
     }
 
-    public ArrayList<Vehicle> getAllVehicles() {
+    public ArrayList<Vehicle> getAllVehicles()
+    {
         return inventory;
     }
 
-    public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
-        return null;
+    public ArrayList<Vehicle> getVehiclesByPrice(
+            double min,
+            double max)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getPrice() >= min &&
+                    vehicle.getPrice() <= max)
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
-        return null;
+    public ArrayList<Vehicle> getVehiclesByMakeModel(
+            String make,
+            String model)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getMake().equalsIgnoreCase(make)
+                    &&
+                    vehicle.getModel().equalsIgnoreCase(model))
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByYear(int min, int max) {
-        return null;
+    public ArrayList<Vehicle> getVehiclesByYear(
+            int min,
+            int max)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getYear() >= min &&
+                    vehicle.getYear() <= max)
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByColor(String color) {
-        return null;
+    public ArrayList<Vehicle> getVehiclesByColor(
+            String color)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getColor()
+                    .equalsIgnoreCase(color))
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByMileage(int min, int max) {
-        return null;
+    public ArrayList<Vehicle> getVehiclesByMileage(
+            int min,
+            int max)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getOdometer() >= min &&
+                    vehicle.getOdometer() <= max)
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public ArrayList<Vehicle> getVehiclesByType(String vehicleType) {
-        return null;
-    }
-    public void removeVehicle(Vehicle vehicle) {
+    public ArrayList<Vehicle> getVehiclesByType(
+            String vehicleType)
+    {
+        ArrayList<Vehicle> matchingVehicles =
+                new ArrayList<>();
 
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getVehicleType()
+                    .equalsIgnoreCase(vehicleType))
+            {
+                matchingVehicles.add(vehicle);
+            }
+        }
+
+        return matchingVehicles;
     }
 
-    public String getName() {
+    public void removeVehicle(Vehicle vehicle)
+    {
+        inventory.remove(vehicle);
+    }
+
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
     }
 }
 
