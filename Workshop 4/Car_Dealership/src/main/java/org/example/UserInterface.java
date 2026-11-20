@@ -389,6 +389,58 @@ public class UserInterface
         String choice =
                 scanner.nextLine();
 
+        Contract contract = null;
+
+        if (choice.equalsIgnoreCase("S"))
+        {
+            System.out.print(
+                    "Finance? (Y/N): ");
+
+            boolean finance =
+                    scanner.nextLine()
+                            .equalsIgnoreCase("Y");
+
+            contract =
+                    new SalesContract(
+                            String.valueOf(
+                                    java.time.LocalDate.now()),
+                            customerName,
+                            customerEmail,
+                            selectedVehicle,
+                            finance);
+        }
+
+        else if (choice.equalsIgnoreCase("L"))
+        {
+            contract =
+                    new LeaseContract(
+                            String.valueOf(
+                                    java.time.LocalDate.now()),
+                            customerName,
+                            customerEmail,
+                            selectedVehicle);
+        }
+
+        if (contract != null)
+        {
+            ContractDataManager contractDataManager =
+                    new ContractDataManager();
+
+            contractDataManager
+                    .saveContract(contract);
+
+            dealership.removeVehicle(selectedVehicle);
+
+            DealershipFileManager dealershipFileManager =
+                    new DealershipFileManager();
+
+            dealershipFileManager.saveDealership(
+                    dealership);
+
+            System.out.println(
+                    "\nContract saved successfully.");
+        }
+
         System.out.println();
         System.out.println(
                 selectedVehicle.getYear() +
