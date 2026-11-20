@@ -30,6 +30,7 @@ public class UserInterface
             System.out.println("7) List All Vehicles");
             System.out.println("8) Add Vehicle");
             System.out.println("9) Remove Vehicle");
+            System.out.println("10) Sell / Lease Vehicle");
             System.out.println("99) Quit");
 
             System.out.print("\nSelect an option: ");
@@ -75,6 +76,8 @@ public class UserInterface
                 case 9:
                     processRemoveVehicleRequest();
                     break;
+
+
 
                 case 99:
                     running = false;

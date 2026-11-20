@@ -15,15 +15,37 @@ public class LeaseContract extends Contract
                 vehicleSold);
     }
 
+    public double getExpectedEndingValue()
+    {
+        return getVehicleSold().getPrice() * .50;
+    }
+
+    public double getLeaseFee()
+    {
+        return getVehicleSold().getPrice() * .07;
+    }
+
     @Override
     public double getTotalPrice()
     {
-        return 0;
+        return getExpectedEndingValue()
+                + getLeaseFee();
     }
 
     @Override
     public double getMonthlyPayment()
     {
-        return 0;
+        double leaseAmount =
+                getTotalPrice();
+
+        double monthlyInterestRate =
+                .04 / 12;
+
+        return (leaseAmount *
+                monthlyInterestRate)
+                /
+                (1 - Math.pow(
+                        1 + monthlyInterestRate,
+                        -36));
     }
 }

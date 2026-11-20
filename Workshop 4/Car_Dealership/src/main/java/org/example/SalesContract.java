@@ -20,17 +20,17 @@ public class SalesContract extends Contract
         this.finance = finance;
     }
 
-    private double getSalesTaxAmount()
+    public double getSalesTaxAmount()
     {
         return getVehicleSold().getPrice() * .05;
     }
 
-    private double getRecordingFee()
+    public double getRecordingFee()
     {
         return 100;
     }
 
-    private double getProcessingFee()
+    public double getProcessingFee()
     {
         if (getVehicleSold().getPrice() < 10000)
         {
@@ -39,6 +39,7 @@ public class SalesContract extends Contract
 
         return 495;
     }
+
     @Override
     public double getTotalPrice()
     {
@@ -56,7 +57,8 @@ public class SalesContract extends Contract
             return 0;
         }
 
-        double loanAmount = getTotalPrice();
+        double loanAmount =
+                getTotalPrice();
 
         double annualInterestRate;
         int loanLength;
@@ -76,7 +78,8 @@ public class SalesContract extends Contract
                 annualInterestRate / 12;
 
         return (loanAmount *
-                monthlyInterestRate) /
+                monthlyInterestRate)
+                /
                 (1 - Math.pow(
                         1 + monthlyInterestRate,
                         -loanLength));
