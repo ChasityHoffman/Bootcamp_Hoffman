@@ -77,7 +77,9 @@ public class UserInterface
                     processRemoveVehicleRequest();
                     break;
 
-
+                case 10:
+                    processSellOrLeaseVehicleRequest();
+                    break;
 
                 case 99:
                     running = false;
@@ -339,5 +341,60 @@ public class UserInterface
             System.out.println(
                     "\nVehicle not found.");
         }
+    }
+
+    private void processSellOrLeaseVehicleRequest()
+    {
+        System.out.print("Enter VIN: ");
+
+        int vin =
+                Integer.parseInt(
+                        scanner.nextLine());
+
+        Vehicle selectedVehicle = null;
+
+        for (Vehicle vehicle :
+                dealership.getAllVehicles())
+        {
+            if (vehicle.getVin() == vin)
+            {
+                selectedVehicle = vehicle;
+                break;
+            }
+        }
+
+        if (selectedVehicle == null)
+        {
+            System.out.println(
+                    "Vehicle not found.");
+
+            return;
+        }
+
+        System.out.print(
+                "Customer Name: ");
+
+        String customerName =
+                scanner.nextLine();
+
+        System.out.print(
+                "Customer Email: ");
+
+        String customerEmail =
+                scanner.nextLine();
+
+        System.out.print(
+                "Sale or Lease (S/L): ");
+
+        String choice =
+                scanner.nextLine();
+
+        System.out.println();
+        System.out.println(
+                selectedVehicle.getYear() +
+                        " " +
+                        selectedVehicle.getMake() +
+                        " " +
+                        selectedVehicle.getModel());
     }
 }
