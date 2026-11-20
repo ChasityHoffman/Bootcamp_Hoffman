@@ -20,21 +20,47 @@ public class UserInterface
         boolean running = true;
 
         while (running)
-        {
-            System.out.println("1) Find Vehicles By Price Range");
-            System.out.println("2) Find Vehicles By Make / Model");
-            System.out.println("3) Find Vehicles By Year Range");
-            System.out.println("4) Find Vehicles By Color");
-            System.out.println("5) Find Vehicles By Mileage Range");
-            System.out.println("6) Find Vehicles By Type");
-            System.out.println("7) List All Vehicles");
-            System.out.println("8) Add Vehicle");
-            System.out.println("9) Remove Vehicle");
-            System.out.println("10) Sell / Lease Vehicle");
-            System.out.println("99) Quit");
+        {System.out.println(CYAN +
+                "\n╔════════════════════════════════════╗\n" +
+                "║        CAR DEALERSHIP SYSTEM       ║\n" +
+                "║       Inventory Management         ║\n" +
+                "╚════════════════════════════════════╝\n"
+                + RESET);
+            System.out.println(PURPLE + "1)" + RESET +
+                    " Find Vehicles By Price Range");
+            System.out.println(PURPLE + "2)" + RESET +
+                    " Find Vehicles By Make / Model");
 
-            System.out.print("\nSelect an option: ");
+            System.out.println(PURPLE + "3)" + RESET +
+                    " Find Vehicles By Year Range");
 
+            System.out.println(PURPLE + "4)" + RESET +
+                    " Find Vehicles By Color");
+
+            System.out.println(PURPLE + "5)" + RESET +
+                    " Find Vehicles By Mileage Range");
+
+            System.out.println(PURPLE + "6)" + RESET +
+                    " Find Vehicles By Type");
+
+            System.out.println(YELLOW + "7)" + RESET +
+                    " List All Vehicles");
+
+            System.out.println(GREEN + "8)" + RESET +
+                    " Add Vehicle");
+
+            System.out.println(YELLOW + "9)" + RESET +
+                    " Remove Vehicle");
+
+            System.out.println(CYAN + "10)" + RESET +
+                    " Sell / Lease Vehicle");
+
+            System.out.println(CYAN + "99)" + RESET +
+                    " Quit");
+
+            System.out.print(CYAN +
+                    "\nSelect an option: "
+                    + RESET);
             int choice =
                     Integer.parseInt(
                             scanner.nextLine());
@@ -82,6 +108,16 @@ public class UserInterface
                     break;
 
                 case 99:
+                    System.out.println(CYAN +
+                            "\n╔════════════════════════════════════╗\n" +
+                            "║ THANK YOU FOR USING THE            ║\n" +
+                            "║ CAR DEALERSHIP SYSTEM              ║\n" +
+                            "╠════════════════════════════════════╣\n" +
+                            "║ Your changes have been saved.      ║\n" +
+                            "║ Have a great day!                  ║\n" +
+                            "╚════════════════════════════════════╝\n"
+                            + RESET);
+
                     running = false;
                     break;
 
@@ -91,6 +127,13 @@ public class UserInterface
             }
         }
     }
+
+    private static final String RESET = "\u001B[0m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String PURPLE = "\u001B[35m";
+
 
     private void init()
     {
@@ -105,7 +148,9 @@ public class UserInterface
             ArrayList<Vehicle> vehicles)
     {
         for (Vehicle vehicle : vehicles)
-        {
+        { System.out.println(YELLOW +
+                "\n===== VEHICLE RESULTS =====\n"
+                + RESET);
             System.out.println(
                     vehicle.getVin() + " | " +
                             vehicle.getYear() + " | " +
