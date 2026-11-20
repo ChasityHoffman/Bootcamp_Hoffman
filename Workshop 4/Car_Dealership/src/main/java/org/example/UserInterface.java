@@ -161,6 +161,12 @@ public class UserInterface
                             vehicle.getOdometer() + " | $" +
                             vehicle.getPrice());
         }
+        if (vehicles.isEmpty())
+        {
+            System.out.println(
+                    "\nNo matching vehicles found.");
+            return;
+        }
     }
 
     private void processGetAllVehiclesRequest()
@@ -473,6 +479,10 @@ public class UserInterface
 
             contractDataManager
                     .saveContract(contract);
+
+            System.out.println(GREEN +
+                    "\n✓ Contract saved successfully!"
+                    + RESET);
 
             dealership.removeVehicle(selectedVehicle);
 
